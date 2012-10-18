@@ -18,22 +18,24 @@
     return [formatter stringFromNumber:self];
 }
 
-- (NSString *)byteRepresentation {
-    unsigned long long size = [self longLongValue];
+
+- (NSString *)byteRepresentation:(UINT64)inputValue {
+    UINT64 size = inputValue;
     
-    if (size < 999) {
-        return [NSString stringWithFormat:@"%.2f KB", (float)size];
+    if (size < 999999) {
+        return [NSString stringWithFormat:@"%.3f KB", (float)size / 1024.0];
     }
     
     if (size < 999999999) {
-        return [NSString stringWithFormat:@"%.2f MB", size / 1048576.0];
+        return [NSString stringWithFormat:@"%.3f MB", size / 1048576.0];
     }
     
     if (size < 999999999999) {
-        return [NSString stringWithFormat:@"%.2f GB", size / 1073741824.0];
+        return [NSString stringWithFormat:@"%.3f GB", size / 1073741824.0];
     }
     
-    return [NSString stringWithFormat:@"%.2f TB", size / 1099511627776.0];
+    return [NSString stringWithFormat:@"%.3f TB", size / 1099511627776.0];
+    
 }
 
 - (NSString *)bitRepresentation {
